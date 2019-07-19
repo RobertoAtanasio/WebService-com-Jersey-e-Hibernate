@@ -17,15 +17,12 @@ public class MarcaService {
         EntityManager em = JPAUtil.getEntityManager();
 
         try {
-        	System.out.println(">>> MarcaService... salvarMarca");
             em.getTransaction().begin();
             marcaDAO.salvarMarca(marca, em);
             if (marca.getProdutos() != null) {
-            	System.out.println(">>> MarcaService... getProdutos");
                 marca.getProdutos()
                         .parallelStream()
                         .forEach(marca::addProdutoToMarca);
-                System.out.println(">>> MarcaService... " + marca.toString());
             }
 
             em.getTransaction().commit();

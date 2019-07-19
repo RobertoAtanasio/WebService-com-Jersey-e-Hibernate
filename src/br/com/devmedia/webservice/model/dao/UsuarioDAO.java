@@ -8,7 +8,6 @@ import br.com.devmedia.webservice.model.domain.Usuario;
 public class UsuarioDAO {
 
 	public Usuario recuperarUsuarioPorUsernameEPassword(String username, String password) {
-		System.out.println(">>> recuperarUsuarioPorUsernameEPassword");
         EntityManager em = JPAUtil.getEntityManager();
         try {
             return em.createQuery("SELECT u FROM Usuario u WHERE u.username = :username AND u.password = :password", Usuario.class)

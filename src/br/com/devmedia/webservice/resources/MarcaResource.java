@@ -34,7 +34,6 @@ public class MarcaResource {
 
     @POST
     public Response salvarMarca(Marca marca, @Context UriInfo uriInfo) {
-    	System.out.println(">>>>> Marcaresource...salvarMarca");
         marcaService.salvarMarca(marca);
 
         return Response
@@ -45,10 +44,8 @@ public class MarcaResource {
 
     @GET
     public List<MarcaDTO> recuperarMarcas(@QueryParam("nome") @DefaultValue("") String nome) {
-    	System.out.println(">>>>> Marcaresource...recuperarMarcas");
     	if (nome.isEmpty()) {
     		List<MarcaDTO> lista = marcaService.recuperarMarcas().stream().map(MarcaDTO::criarDTO).collect(Collectors.toList());
-    		System.out.println(">>>>> Marcaresource...recuperarMarcas: " + lista.toString());
     		return lista;
     	}
     	return marcaService.recuperarMarcasPorNome(nome).stream().map(MarcaDTO::criarDTO).collect(Collectors.toList());
@@ -63,7 +60,6 @@ public class MarcaResource {
     @GET
     @Path("{marcaId}")
     public Marca recuperarMarcaPorId(@PathParam("marcaId") long marcaId) {
-    	System.out.println(">>>>> Marcaresource...recuperarMarcaPorId");
         return marcaService.recuperarMarcaPorId(marcaId);
     }
 
@@ -71,7 +67,6 @@ public class MarcaResource {
     @Path("{marcaId}")
     @RolesAllowed({"ADMIN", "SUPERVISOR"})
     public Marca atualizarMarca(@PathParam("marcaId") long marcaId, Marca marca) {
-    	System.out.println(">>>>> Marcaresource...atualizarMarca");
         marcaService.atualizarMarca(marca, marcaId);
         return marca;
     }
@@ -80,13 +75,11 @@ public class MarcaResource {
     @Path("{marcaId}")
     @RolesAllowed({"ADMIN"})
     public void excluirMarca(@PathParam("marcaId") long marcaId) {
-    	System.out.println(">>>>> Marcaresource...excluirMarca");
         marcaService.excluirMarca(marcaId);
     }
 
     @Path("{marcaId}/produtos")
     public ProdutoResource obterProdutoResource() {
-    	System.out.println(">>>>> Marcaresource...obterProdutoResource");
         return new ProdutoResource();
     }
 }

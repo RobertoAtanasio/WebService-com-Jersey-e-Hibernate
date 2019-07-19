@@ -11,7 +11,6 @@ import br.com.devmedia.webservice.model.domain.Marca;
 public class MarcaDAO {
 
 	public void salvarMarca(Marca marca, EntityManager em) {
-		System.out.println(">>> MarcaDAO... salvarMarca");
         em.persist(marca);
     }
 

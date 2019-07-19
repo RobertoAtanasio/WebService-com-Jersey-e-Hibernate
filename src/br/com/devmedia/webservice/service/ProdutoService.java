@@ -49,7 +49,6 @@ public class ProdutoService {
     }
 	
 	public List<Produto> recuperarProdutos(long marcaId) {
-		System.out.println(">>>>> ProdutoService...recuperarProdutos: " + marcaId);
         return produtoDAO.recuperarProdutos(IdUtils.idValido(marcaId));
     }
 

@@ -28,10 +28,10 @@ import br.com.devmedia.webservice.service.ProdutoService;
 @Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
 @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 @PermitAll
-public class ProdutoResource { 
-	
+public class ProdutoResource {
+
 	private final ProdutoService produtoService = new ProdutoService();
-	
+
 //	@GET
 //	public List<Produto> getProdutos(@BeanParam ProdutoFilterBean produtoFilter) {
 //		if ((produtoFilter.getOffset() >= 0) && (produtoFilter.getLimit() > 0)) {
@@ -43,7 +43,7 @@ public class ProdutoResource {
 //		
 //		return produtoService.getProdutos();
 //	}
-	
+
 //	@GET
 //	public List<Produto> getProdutos(@QueryParam("name") String name) {
 //		if (name != null) {
@@ -51,7 +51,7 @@ public class ProdutoResource {
 //		}
 //		return service.getProdutos();
 //	}
-	
+
 //	@GET
 //	@Path("{produtoId}")
 //	public Produto getProduto(@PathParam("produtoId") long id) {
@@ -79,43 +79,44 @@ public class ProdutoResource {
 //		produtoService.deleteProduto(id);	
 //	}
 
-	//-----------
-	
+	// -----------
+
 	@POST
-    public Response salvarProduto(@PathParam("marcaId") long marcaId, Produto produto, @Context UriInfo uriInfo) {
-        produtoService.salvarProduto(produto, marcaId);
-        // retornar em location a URL para a pesquisa do produto gravado associado à marca
-        return Response
-                .created(uriInfo.getAbsolutePathBuilder().path(Long.toString(produto.getId())).build())
-                .entity(produto)
-                .build();
-    }
-	
+	public Response salvarProduto(@PathParam("marcaId") long marcaId, Produto produto, @Context UriInfo uriInfo) {
+		produtoService.salvarProduto(produto, marcaId);
+		// retornar em location a URL para a pesquisa do produto gravado associado à
+		// marca
+		return Response.created(uriInfo.getAbsolutePathBuilder().path(Long.toString(produto.getId())).build())
+				.entity(produto).build();
+	}
+
 	@GET
-    public List<Produto> recuperarProdutos(@PathParam("marcaId") long marcaId, @QueryParam("nome") @DefaultValue("") String nome) {
-        System.out.println(">>>>> ProdutoResource... recuperarProdutos: " + marcaId);
-		return (nome.isEmpty()) ? produtoService.recuperarProdutos(marcaId) : produtoService.recuperarProdutosPorNome(marcaId, nome);
-    }
+	public List<Produto> recuperarProdutos(@PathParam("marcaId") long marcaId,
+			@QueryParam("nome") @DefaultValue("") String nome) {
+		return (nome.isEmpty()) ? produtoService.recuperarProdutos(marcaId)
+				: produtoService.recuperarProdutosPorNome(marcaId, nome);
+	}
 
-    @GET
-    @Path("{produtoId}")
-    public Produto recuperarProdutoPorId(@PathParam("marcaId") long marcaId, @PathParam("produtoId") long produtoId) {
-        return produtoService.recuperarProdutoPorId(marcaId, produtoId);
-    }
+	@GET
+	@Path("{produtoId}")
+	public Produto recuperarProdutoPorId(@PathParam("marcaId") long marcaId, @PathParam("produtoId") long produtoId) {
+		return produtoService.recuperarProdutoPorId(marcaId, produtoId);
+	}
 
-    @PUT
-    @Path("{produtoId}")
-    @RolesAllowed({"ADMIN", "SUPERVISOR"})
-    public Produto atualizarProduto(@PathParam("marcaId") long marcaId, @PathParam("produtoId") long produtoId, Produto produto) {
-        produtoService.atualizarProduto(marcaId, produtoId, produto);
-        return produto;
-    }
+	@PUT
+	@Path("{produtoId}")
+	@RolesAllowed({ "ADMIN", "SUPERVISOR" })
+	public Produto atualizarProduto(@PathParam("marcaId") long marcaId, @PathParam("produtoId") long produtoId,
+			Produto produto) {
+		produtoService.atualizarProduto(marcaId, produtoId, produto);
+		return produto;
+	}
 
-    @DELETE
-    @Path("{produtoId}")
-    @RolesAllowed({"ADMIN"})
-    public void excluirProduto(@PathParam("produtoId") long produtoId) {
-        produtoService.excluirProduto(produtoId);
-    }
+	@DELETE
+	@Path("{produtoId}")
+	@RolesAllowed({ "ADMIN" })
+	public void excluirProduto(@PathParam("produtoId") long produtoId) {
+		produtoService.excluirProduto(produtoId);
+	}
 
 }

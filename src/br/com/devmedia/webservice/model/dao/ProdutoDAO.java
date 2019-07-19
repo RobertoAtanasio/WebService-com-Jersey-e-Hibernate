@@ -31,7 +31,6 @@ public class ProdutoDAO {
     }
 	
 	public List<Produto> recuperarProdutos(long marcaId) {
-		System.out.println(">>>>> ProdutoDAO...recuperarProdutos");
         EntityManager em = JPAUtil.getEntityManager();
 
         return em.createQuery("select new Produto(p.id, p.nome, p.descricao, p.quantidade) from Produto p where p.marca.id = :marcaId", Produto.class)

@@ -18,7 +18,6 @@ import br.com.devmedia.webservice.jwt.KeyGenerator;
 import br.com.devmedia.webservice.jwt.TokenJWTUtil;
 import br.com.devmedia.webservice.jwt.UserDetails;
 import br.com.devmedia.webservice.resources.LoginJWTResource;
-import br.com.devmedia.webservice.resources.MarcaResource;
 import br.com.devmedia.webservice.service.exception.UnauthenticatedException;
 
 // o valor Priorities.AUTHENTICATION indica que este filtro deve ser executado antes de todos os outros
@@ -61,16 +60,16 @@ public class JWTAuthenticationFilter implements ContainerRequestFilter {
 	
 	private boolean acessoParaLoginNaAPI(ContainerRequestContext requestContext) {
 		// Estes comnados formatam as URI de acordo com os parâmetros passados. Com isso, podemos tratar as URI's que serão controladas pelo Token
-		System.out.println("<<<< acessoParaLoginNaAPI 1: " + requestContext.getUriInfo().getAbsolutePath().toString() );
-		System.out.println("<<<< acessoParaLoginNaAPI 2: " + uriInfo.getBaseUriBuilder().path(LoginJWTResource.class).build().toString() );
-		System.out.println("<<<< acessoParaLoginNaAPI 3: " + uriInfo.getBaseUriBuilder().path(MarcaResource.class).build().toString() );
-		System.out.println("<<<< acessoParaLoginNaAPI 4: " + requestContext.getMethod() );
+//		System.out.println("<<<< acessoParaLoginNaAPI 1: " + requestContext.getUriInfo().getAbsolutePath().toString() );
+//		System.out.println("<<<< acessoParaLoginNaAPI 2: " + uriInfo.getBaseUriBuilder().path(LoginJWTResource.class).build().toString() );
+//		System.out.println("<<<< acessoParaLoginNaAPI 3: " + uriInfo.getBaseUriBuilder().path(MarcaResource.class).build().toString() );
+//		System.out.println("<<<< acessoParaLoginNaAPI 4: " + requestContext.getMethod() );
         return requestContext.getUriInfo().getAbsolutePath().toString()
                 .equals(uriInfo.getBaseUriBuilder().path(LoginJWTResource.class).build().toString());
     }
 
     private boolean acessoParaMetodosDeConsulta(ContainerRequestContext requestContext) {
-    	System.out.println("<<<< acessoParaMetodosDeConsulta: " + requestContext.getMethod() );
+//    	System.out.println("<<<< acessoParaMetodosDeConsulta: " + requestContext.getMethod() );
         return "GET".equalsIgnoreCase(requestContext.getMethod());
     }
 
