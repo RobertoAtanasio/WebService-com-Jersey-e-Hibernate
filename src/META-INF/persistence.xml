@@ -7,9 +7,12 @@
  
  <persistence-unit name="produtos" transaction-type="RESOURCE_LOCAL">
  
-   <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+   <!-- <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider> -->
  
-   <class>br.com.devmedia.webservice.model.domain.Produto</class>
+   <!-- <class>br.com.devmedia.webservice.model.domain.Produto</class>
+   <class>br.com.devmedia.webservice.model.domain.Marca</class>
+   <class>br.com.devmedia.webservice.model.domain.Role</class> -->
+   <!-- <class>br.com.devmedia.webservice.model.domain.Usuario</class> -->
  
    <properties>
       <!-- Driver JDBC para conexão com o MySQL -->
